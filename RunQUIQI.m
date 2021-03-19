@@ -19,6 +19,8 @@ eval(['load ' fullfile(Params.HomeDir,'Subject_Details.mat')]);
 
 lambda={[0 1 2 3],0,1,2,3,4,5};
 Subregions={'p1','p2'};DataType={'PDw_R2s','MTw_R2s','T1w_R2s'};AnalType='Full';
+% Includes GM regional analysis:
+% lambda={0,1,2,3,4,5};
 % Subregions=cat(2,{'p1','p2'},getROIpairs('GM'));DataType={'PDw_R2s'};AnalType='Full';
 [QUIQI,FolderPaths]=PrepAnalysis(Subject_Details,lambda,DataType,Subregions,AnalType);
 RunAnalysis(QUIQI,AnalType);
