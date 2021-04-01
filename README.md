@@ -1,15 +1,19 @@
-# Inserting an index of motion degradation into the analysis of MRI data (QUIQI) - Analysis script
+# Inserting an index of motion degradation into the analysis of MRI data (QUIQI) - Analysis code
 
 Authors: Antoine Lutti & Giulia Di Domenicantonio, 2021
 Laboratory for Neuroimaging Research
-Lausanne University Hospital & Lausanne University, Lausanne, Switzerland
+Lausanne University Hospital & University of Lausanne, Lausanne, Switzerland
 Copyright (C) 2021 Laboratory for Neuroimaging Research
 
 ## INTRODUCTION
-This package includes supporting material for the scientific article by Lutti et al. entitled ‘Inserting an image quality index into the analysis of MRI data’ (REF) , which introduces a method is to account for the degradation of data quality due to motion in the analysis of MRI data. The purpose of this package is to allow the scientific community to cross-examine the analysis script written to implement the method and to replicate the main results obtained. This package also constitutes a template to help interested users to implement this method for their own neuroimaging studies. Note that this code has been integrated into a customized version of the hMRI toolbox () to facilitate its use. Integration into the main version of hMRI toolbox (https://hmri-group.github.io/hMRI-toolbox/) is planned for a later date.  
+INTRODUCTION
+This package includes supporting material for the scientific article by Lutti et al. entitled ‘Inserting an image quality index into the analysis of MRI data’. This article introduces a method called QUIQI that accounts for the degradation of data quality due to motion in the analysis of MRI data. The purpose of this package is to allow the scientific community to cross-examine the analysis script written to implement the method and to replicate the main results obtained. This package also constitutes a template to help interested users to implement this method for their own neuroimaging studies. Note that this code has been integrated into a customized version of the hMRI toolbox (https://github.com/nadegecorbin/hMRI-toolbox) to facilitate its use. Integration into the main version of the hMRI toolbox (https://hmri-group.github.io/hMRI-toolbox/) is planned for a later date.
 The complete support package for the QUIQI method includes:
-1.	A copy of the original analysis code used to compile the results presented in the original scientific publication. This analysis script is described in further details here. 
-2.	A subset of the data used in the original publication for computation of the results, available here: . This data also includes a set of analysis results obtained by running the code described in 1. on the provided data. From the provided code and data, users should be able to replicate the computation of these results.
+1.	A copy of the original analysis code used to compile the results presented in the original scientific publication (available here: https://github.com/antoinelutti/QUIQI). 
+2.	A subset of the data used in the original publication for computation of the results (doi: 10.5281/zenodo.4647081). This data also includes a set of analysis results obtained by running the code described in 1. on the provided data. 
+The combination of 1. and 2. allows users to replicate the computation of the provided analysis results.
+The material provided here only concerns part 1. of the QUIQI support package described above – original analysis code.
+The QUIQI method requires the values of a Motion Degradation Index for each of the datasets to be analysed. The proposed method can accommodate all types of MDI, which need to be computed separately prior to the analysis of the data. In its current form, the analysis script expects the MDI values as a separate field in a matlab structure that contains relevant metadata (Subject_Details.mat). This can be modified according to users’ preferences. 
 This method requires the values of a Motion Degradation Index for each of the datasets to be analysed. The proposed method can accommodate all types of MDI, which need to be computed separately prior to the analysis of the data. In its current form, the analysis script expects the MDI values as a separate field in a matlab structure that contains relevant metadata (Subject_Details.mat). This can be modified according to users’ preferences.    
 ## CONTENT
 The provided material contains the matlab scripts required for data analysis. The main function is RunQUIQI.m. In the SPM folder, spm_spm.m and spm_est_non_sphericity.m are SPM12 files (version 7771) that were edited to provide the Free Energy estimates from the ReML computation as an output. These files are not a requirement for the analyses but may be used when change in Free Energy need to be considered. Also, note that the provided spm_spm.m script also contains an optional call to spm_reml_sc to enforce positive hyper-parameter estimates.  
