@@ -1,8 +1,9 @@
 # Inserting an index of motion degradation into the analysis of MRI data (QUIQI) - Analysis code
 
-Authors: Antoine Lutti & Giulia Di Domenicantonio, 2021
-Laboratory for Neuroimaging Research
-Lausanne University Hospital & University of Lausanne, Lausanne, Switzerland
+# Authors
+Antoine Lutti & Giulia Di Domenicantonio, 2021  
+Laboratory for Neuroimaging Research  
+Lausanne University Hospital & University of Lausanne, Lausanne, Switzerland  
 Copyright (C) 2021 Laboratory for Neuroimaging Research
 
 ## REFERENCE
