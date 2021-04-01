@@ -5,9 +5,10 @@ Laboratory for Neuroimaging Research
 Lausanne University Hospital & University of Lausanne, Lausanne, Switzerland
 Copyright (C) 2021 Laboratory for Neuroimaging Research
 
+## REFERENCE
+Lutti et al. ‘Inserting an image quality index into the analysis of MRI data’ 
 ## INTRODUCTION
-INTRODUCTION
-This package includes supporting material for the scientific article by Lutti et al. entitled ‘Inserting an image quality index into the analysis of MRI data’. This article introduces a method called QUIQI that accounts for the degradation of data quality due to motion in the analysis of MRI data. The purpose of this package is to allow the scientific community to cross-examine the analysis script written to implement the method and to replicate the main results obtained. This package also constitutes a template to help interested users to implement this method for their own neuroimaging studies. Note that this code has been integrated into a customized version of the hMRI toolbox (https://github.com/nadegecorbin/hMRI-toolbox) to facilitate its use. Integration into the main version of the hMRI toolbox (https://hmri-group.github.io/hMRI-toolbox/) is planned for a later date.
+This package includes supporting material for the scientific article by Lutti et al. entitled ‘Inserting an image quality index into the analysis of MRI data’. This article introduces a method called QUIQI that accounts for the degradation of data quality due to motion in the analysis of MRI data. The purpose of this package is to allow the scientific community to cross-examine the analysis script written to implement the method and to replicate the main results obtained. This package also constitutes a template to help interested users to implement this method for their own neuroimaging studies. Note that this code has been integrated into a customized version of the hMRI toolbox (https://github.com/nadegecorbin/hMRI-toolbox) to facilitate its use. Integration into the main version of the hMRI toolbox (https://hmri-group.github.io/hMRI-toolbox/) is planned for a later date.  
 The complete support package for the QUIQI method includes:
 1.	A copy of the original analysis code used to compile the results presented in the original scientific publication (available here: https://github.com/antoinelutti/QUIQI). 
 2.	A subset of the data used in the original publication for computation of the results (doi: 10.5281/zenodo.4647081). This data also includes a set of analysis results obtained by running the code described in 1. on the provided data. 
