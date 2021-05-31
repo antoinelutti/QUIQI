@@ -152,15 +152,15 @@ if strcmp(AnalType,'GroupComparison')
     matlabbatch{1}.spm.stats.con.consess{2}.tcon.sessrep = 'none';
     matlabbatch{1}.spm.stats.con.delete = 1;
     spm_jobman('run', matlabbatch);
-elseif strcmp(AnalType,'Exclusion')
-    spm_jobman('initcfg');
-    clear matlabbatch
-    matlabbatch{1}.spm.stats.con.spmmat = {fullfile(CurrentDir,'SPM.mat')};
-    matlabbatch{1}.spm.stats.con.consess{1}.tcon.name = 'Mean';
-    matlabbatch{1}.spm.stats.con.consess{1}.tcon.weights = [1 0];
-    matlabbatch{1}.spm.stats.con.consess{1}.tcon.sessrep = 'none';
-    matlabbatch{1}.spm.stats.con.delete = 1;
-    spm_jobman('run', matlabbatch);
+% elseif strcmp(AnalType,'Exclusion')
+%     spm_jobman('initcfg');
+%     clear matlabbatch
+%     matlabbatch{1}.spm.stats.con.spmmat = {fullfile(CurrentDir,'SPM.mat')};
+%     matlabbatch{1}.spm.stats.con.consess{1}.tcon.name = 'Mean';
+%     matlabbatch{1}.spm.stats.con.consess{1}.tcon.weights = [1 0];
+%     matlabbatch{1}.spm.stats.con.consess{1}.tcon.sessrep = 'none';
+%     matlabbatch{1}.spm.stats.con.delete = 1;
+%     spm_jobman('run', matlabbatch);
 else
     spm_jobman('initcfg');
     clear matlabbatch

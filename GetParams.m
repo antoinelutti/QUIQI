@@ -7,10 +7,10 @@ function Params=GetParams()
 % Laboratory for Neuroimaging Research, Lausanne University Hospital, Switzerland
 
 Params.HomeDir='F:\alutti\QUIQIdata';% The folders containing the analysis results will be created at this location
-Params.DataDir=Params.HomeDir;% Location of the data folders
-Params.NMDir=fullfile(Params.HomeDir,'Neuromorphometrics');% Location of the Neuromorphometrics folder
+Params.DataDir=Params.HomeDir;% Location of the Data folder
+Params.NMDir=fullfile(Params.HomeDir,'Neuromorphometrics');% Location the Neuromorphometrics folder
 Params.AnalysisFolder='Analysis';%Naming of the analysis folder
-Params.DataSubDir='';%Data location within the main folder of each dataset.
+Params.DataSubDir=fullfile('');%Data location within the main folder of each dataset.
 
 Params.MDIvsResOrder=4;%order of the polynomial fit of var(res)vsMDI
 

@@ -24,14 +24,15 @@ elseif strcmp(AnalType,'Residuals')
 elseif strcmp(AnalType,'Reproducibility')
     AnalParams.Subcohort=1;AnalParams.AgeBinning.Nsamples=200;AnalParams.NRepeats=100;
 elseif strcmp(AnalType,'Specificity')
-    AnalParams.AgeBinning.Nsamples=10;AnalParams.NRepeats=1e1;%1e3;
+    AnalParams.AgeBinning.Nsamples=10;AnalParams.NRepeats=1e1;
     AnalParams.Subcohort=1;AnalParams.ShuffleAge=1;
 elseif strcmp(AnalType,'MotionBias')
+    AnalParams.SaveResiduals=1;
     AnalParams.Subcohort=1;AnalParams.AgeBinning.Nsamples=200;
     AnalParams.AgeBinning.Agemin=56;AnalParams.AgeBinning.Agemax=58;AnalParams.AgeBinning.BinNb=2;
 elseif strcmp(AnalType,'GroupComparison')
     AnalParams.Subcohort=1;AnalParams.ShuffleData=1;AnalParams.NGroup1=60;
-    AnalParams.AgeBinning.Nsamples=200;AnalParams.NRepeats=1e1;%1e3;
+    AnalParams.AgeBinning.Nsamples=200;AnalParams.NRepeats=1e1;
     AnalParams.AgeBinning.Agemin=56;AnalParams.AgeBinning.Agemax=58;AnalParams.AgeBinning.BinNb=2;
 end
 end

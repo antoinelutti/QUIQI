@@ -89,21 +89,46 @@ parfor datactr=1:size(QUIQI,2)
         saveas(gcf, fullfile(SavePath,'Residuals_SDR2sSoS'), 'fig');close(gcf)
     end
 
-%     KS tests
-    HistResH=zeros(size(Residuals,1),1);HistResP=zeros(size(Residuals,1),1);
+    %     KS & ARCH tests
+    
+    [~,B]=sort(MDIVals4Anal{datactr},1);
+    test=ResidVar(B,1)*1e6;
+    numLags = 4e1;
+    logL = zeros(numLags,1); % Preallocation
+    
+    for k = 1:numLags
+        Mdl = garch(0,k);                                   % Create ARCH(k) model
+        [~,~,logL(k)] = estimate(Mdl,test,'Display','off');  % Obtain loglikelihood
+    end
+    
+    aic = aicbic(logL,1:numLags);   % Get AIC
+    [~,lags] = min(aic)             % Obtain suitable number of lags
+    parsave(fullfile(SavePath,'lags'),lags)
+
+    Hhet=zeros(size(Residuals,1),1);Phet=zeros(size(Residuals,1),1);
+    Hstd=zeros(size(Residuals,1),1);Pstd=zeros(size(Residuals,1),1);
     for ctr=1:size(Residuals,1)%1e5%
         Signal=Residuals(ctr,:)';
         if isempty(find(isnan(Signal)))&&isempty(find(isinf(Signal)))
-            [HistResH(ctr),HistResP(ctr)]=kstest((Signal-mean(Signal))/std(Signal,[],1));
+            [Hstd(ctr),Pstd(ctr)]=kstest((Signal-mean(Signal))/std(Signal,[],1));
+            [Hhet(ctr),Phet(ctr)]=archtest(Signal(B)-mean(Signal),'Lags',lags);
         end
     end
     Hmap=zeros(size(spm_read_vols(spm_vol(ResFiles(1,:)))));
-    Hmap(ExplicitMaskIndx)=HistResH;    
-    Vsave.fname=fullfile(spm_str_manip(Vsave.fname,'h'),'HistResH.nii');spm_write_vol(Vsave,Hmap);
+    Hmap(ExplicitMaskIndx)=Hhet;    
+    Vsave.fname=fullfile(spm_str_manip(Vsave.fname,'h'),'Hhet.nii');spm_write_vol(Vsave,Hmap);
 
     Pmap=zeros(size(spm_read_vols(spm_vol(ResFiles(1,:)))));
-    Pmap(ExplicitMaskIndx)=HistResP;    
-    Vsave.fname=fullfile(spm_str_manip(Vsave.fname,'h'),'HistResP.nii');spm_write_vol(Vsave,Pmap); 
+    Pmap(ExplicitMaskIndx)=Phet;    
+    Vsave.fname=fullfile(spm_str_manip(Vsave.fname,'h'),'Phet.nii');spm_write_vol(Vsave,Pmap); 
+    
+    Hmap=zeros(size(spm_read_vols(spm_vol(ResFiles(1,:)))));
+    Hmap(ExplicitMaskIndx)=Hstd;    
+    Vsave.fname=fullfile(spm_str_manip(Vsave.fname,'h'),'Hstd.nii');spm_write_vol(Vsave,Hmap);
+
+    Pmap=zeros(size(spm_read_vols(spm_vol(ResFiles(1,:)))));
+    Pmap(ExplicitMaskIndx)=Pstd;    
+    Vsave.fname=fullfile(spm_str_manip(Vsave.fname,'h'),'Pstd.nii');spm_write_vol(Vsave,Pmap); 
     
     for ctr=1:size(ResFiles,1)%delete residual individual residual maps to save disk space
         delete(deblank(ResFiles(ctr,:)));
