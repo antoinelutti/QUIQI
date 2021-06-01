@@ -1,4 +1,4 @@
-# Inserting an index of motion degradation into the analysis of MRI data (QUIQI) - Analysis code
+# Inserting an index of motion degradation into the statistical analysis of MRI data (QUIQI) - Analysis code
 
 # Authors
 Antoine Lutti & Giulia Di Domenicantonio, 2021  
@@ -7,11 +7,11 @@ Lausanne University Hospital & University of Lausanne, Lausanne, Switzerland
 Copyright (C) 2021 Laboratory for Neuroimaging Research
 
 ## REFERENCE
-Lutti et al. ‘Inserting an image quality index into the analysis of MRI data’ 
+Lutti et al. ‘Inserting an image quality index into the statistical analysis of MRI data’ 
 ## INTRODUCTION
-This package includes supporting material for the scientific article by Lutti et al. entitled ‘Inserting an image quality index into the analysis of MRI data’. This article introduces a method called QUIQI that accounts for the degradation of data quality due to motion in the analysis of MRI data. The purpose of this package is to allow the scientific community to cross-examine the analysis script written to implement the method and to replicate the main results obtained. This package also constitutes a template to help interested users to implement this method for their own neuroimaging studies. Note that this code has been integrated into a customized version of the hMRI toolbox (https://github.com/nadegecorbin/hMRI-toolbox) to facilitate its use. Integration into the main version of the hMRI toolbox (https://hmri-group.github.io/hMRI-toolbox/) is planned for a later date.  
+This package includes supporting material for the scientific article by Lutti et al. entitled ‘Inserting an image quality index into the analysis of MRI data’. This article introduces a method called QUIQI that accounts for the degradation of data quality due to motion in the analysis of MRI data. The purpose of this package is to allow the scientific community to cross-examine the analysis script written to implement the method and to replicate the main results obtained. This package also constitutes a template to help interested users to implement this method for their own neuroimaging studies. Note that this code has been integrated into a customized version of the hMRI toolbox (https://github.com/LREN-physics/hMRI-toolbox) to facilitate its use. Integration into the main version of the hMRI toolbox (https://hmri-group.github.io/hMRI-toolbox/) is planned for a later date.  
 The complete support package for the QUIQI method includes:
-1.	A copy of the original analysis code used to compile the results presented in the original scientific publication (available here: https://github.com/antoinelutti/QUIQI). 
+1.	A copy of the original analysis code used to compile the results presented in the original scientific publication (available here: https://github.com/LREN-physics/QUIQIAnalysisScript). 
 2.	A subset of the data used in the original publication for computation of the results (doi: 10.5281/zenodo.4647081). This data also includes a set of analysis results obtained by running the code described in 1. on the provided data. 
 The combination of 1. and 2. allows users to replicate the computation of the provided analysis results.
 The material provided here only concerns part 1. of the QUIQI support package described above – original analysis code.
@@ -21,7 +21,7 @@ This method requires the values of a Motion Degradation Index for each of the da
 The provided material contains the matlab scripts required for data analysis. The main function is RunQUIQI.m. In the SPM folder, spm_spm.m and spm_est_non_sphericity.m are SPM12 files (version 7771) that were edited to provide the Free Energy estimates from the ReML computation as an output. These files are not a requirement for the analyses but may be used when change in Free Energy need to be considered. Also, note that the provided spm_spm.m script also contains an optional call to spm_reml_sc to enforce positive hyper-parameter estimates.  
  
 ## REQUIREMENTS
-A running version of Matlab (https://ch.mathworks.com/products/matlab.html) and SPM (https://www.fil.ion.ucl.ac.uk/spm/) are pre-requisites for running these analyses. This package may be run on the publicly available data () or on data provided by the user.
+A running version of Matlab (https://ch.mathworks.com/products/matlab.html) and SPM (https://www.fil.ion.ucl.ac.uk/spm/) are pre-requisites for running these analyses. This package may be run on the publicly available data (doi: 10.5281/zenodo.4647081) or on data provided by the user.
 ## INSTALLATION
 - Download the provided package and set the directory locations in GetParams.m according to your installation
 - In matlab, set the paths to your SPM installation and to the folder that contains the provided package.
@@ -37,7 +37,7 @@ d. **‘AnalType’**: type of analysis to be conducted. This variable can take 
 	- ‘Specificity’: As for a ‘Full’ analysis, the statistical analysis involves one-sample t-tests of the age-dependence of the data on age. However, the age assigned to each dataset is scrambled randomly across the datasets to allow for the monitoring of false positives. The number of repetitions of this analysis is set by AnalParams.NRepeats in the GetAnalParams function. Note that in order to limit the size of the provided data, the number of repetitions was set to 10 to compute the provided results (1000 in the scientific article).  
 Another two types of analysis are enabled in the provided script but were not run to generate analysis results as they require datasets within a narrow age-range, of which not enough are available here:  
 	- ‘GroupComparison’: as ‘Specificity’, this analysis aims to monitor the occurrence of false positives in the analyses. Here, this is done in the context of a group comparison using two-sample t-statistics. The number of datasets in the 1st group is set by AnalParams.Ngroup1 in the GetAnalParams function. As for ‘Specificity’ analyses, the number of repetitions of this analysis is set by AnalParams.NRepeats in the GetAnalParams function.   
-	- ‘MotionBias’: this analysis examines the dependence of the R2* data on the MDI (bias). This is achieved using one-sample t-test, inserting the MDI values into the design matrix. The powers of the MDI values inserted into the design matrix is set by  Params.MotionRegPowers field in the GetParams function.  
+	- ‘MotionBias’: this analysis examines the dependence of the R2* data on the MDI (bias). This is achieved using F-tests, inserting the MDI values into the design matrix. The powers of the MDI values inserted into the design matrix is set by  Params.MotionRegPowers field in the GetParams function.  
 Note that the variable settings underlying each type of analysis are determined in the function GetAnalParams
 ### Main QUIQI functions
 Besides the top-level function RunQUIQI.m, the main functions used in this package are: 
